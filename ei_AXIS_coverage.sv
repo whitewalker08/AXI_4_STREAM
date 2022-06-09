@@ -1,34 +1,65 @@
 /*-----------------------------------------------------------------------------
+
+
+
 File name    : ei_AXIS_coverage.sv
+
 
 
 Title        : ei_AXIS_coverage_file
 
 
-Project      : AXIS_SV_VIP  
+
+Project      : AXIS_SV_VIP 
+
 
 
 Created On   : 08-06-2022
 
 
+
 Developers   : einfochips Ltd
+
 
 
 Purpose      : to measure the functionality and feature of the cases and components
 
 
+
 -------------------------------------------------------------------------------
-Copyright (c) 2000-2006 eInfochips           - All rights reserved
+
+
+
+Copyright (c) 2000-2006 eInfochips          - All rights reserved
+
+
+
+
 This software is authored by eInfochips and is eInfochips intellectual
 property, including the copyrights in all countries in the world. This
 software is provided under a license to use only with all other rights,
 including ownership rights, being retained by eInfochips
+
+
+
 This file may not be distributed, copied, or reproduced in any manner,
 electronic or otherwise, without the express written consent of
 eInfochips
+
+
+
 -------------------------------------------------------------------------------
+
+
+
 Revision: 1.0
+
+
+
 -------------------------------------------------------------------------------
+
+
+
 -----------------------------------------------------------------------------*/
 //covergroup declare
 covergroup ei_AXIS_covergroup with sample(bit last);
