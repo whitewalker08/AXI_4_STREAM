@@ -68,14 +68,14 @@ class ei_AXI_STREAM_ALIGNED_UNALIGNED_MIXED_STREAM extends ei_AXIS_master_transa
 
 
 ////////////////////////////////////////////////////////////////////////////////
-  // Method name(callback method) :    post_randomize;
+  // Method name(callback method) :   post_randomize;
 
   // Parameters passed            : - none
 
   // Returned parameters          : - none
 
-  // Description : to randomize TSTRB according to the aligned and unaligned stream 
-  //               according to the  protocol
+  // Description                  :  to randomize TSTRB according to the aligned and unaligned stream 
+  //                                 according to the  protocol
 
   ////////////////////////////////////////////////////////////////////////////////
 function void post_randomize();
@@ -91,9 +91,6 @@ function void post_randomize();
     	max_count = count;
     end
       
-    
-
-    
     if(count > 0)begin
         TSTRB = 8'hff;
       if(flag_unaligned)begin
@@ -129,8 +126,6 @@ function void post_randomize();
         else begin
             TLAST = 0;
         end
-     
-
     end
  
       
@@ -140,5 +135,5 @@ function void post_randomize();
       end
     
     num_of_trans++;
-endfunction
+endfunction :post_randomize
 endclass : ei_AXI_STREAM_ALIGNED_UNALIGNED_MIXED_STREAM
