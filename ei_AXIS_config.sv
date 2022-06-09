@@ -77,7 +77,7 @@ class ei_AXIS_config;
     //static string for verbosity
     static string verbosity = "LOW";
 
-endclass
+endclass :ei_AXIS_config
 
 
 ////////////////////////////////////////////////////////////////////////////////
