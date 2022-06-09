@@ -1,4 +1,9 @@
 
+
+
+
+
+
 covergroup ei_AXIS_covergroup with sample(bit last);
 
 sparse_cp : coverpoint sparse_stream iff(last)
