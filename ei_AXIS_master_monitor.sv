@@ -72,6 +72,7 @@ class ei_AXIS_master_monitor;
   virtual AXIS_interface vif; 
   //mailbox for monitor to scorebard communication
   mailbox #(ei_AXIS_master_transaction) mon2scb;
+  mailbox mon2cov;
 
   //instance of transaction class handle
   ei_AXIS_master_transaction tr;
@@ -88,6 +89,7 @@ class ei_AXIS_master_monitor;
   bit [`DATA_WIDTH-1:0] TDATA_queue[$];
   bit [`number_bytes-1:0] TSTRB_queue[$];
   bit [`number_bytes-1:0] valid_TSTRB_queue[$];
+  ei_AXIS_coverage_packet cov_pkt;
 
   int num_trans;
   ////////////////////////////////////////////////////////////////////////////////
@@ -103,9 +105,10 @@ class ei_AXIS_master_monitor;
 
   ////////////////////////////////////////////////////////////////////////////////
 
-  function new(mailbox#(ei_AXIS_master_transaction) mon2scb);
-    this.mon2scb = mon2scb; 
-     ei_AXIS_covergroup = new();
+  function new(mailbox#(ei_AXIS_master_transaction) mon2scb,mailbox mon2cov);
+    this.mon2scb = mon2scb;
+    this.mon2cov = mon2cov; 
+    //ei_AXIS_covergroup = new();
   endfunction
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -122,7 +125,7 @@ class ei_AXIS_master_monitor;
   
   ////////////////////////////////////////////////////////////////////////////////
 
-covergroup ei_AXIS_covergroup with function sample(bit last);
+/*covergroup ei_AXIS_covergroup with function sample(bit last);
 
 sparse_cp : coverpoint sparse_stream iff(last)
 {
@@ -153,11 +156,21 @@ len_cp:coverpoint num_trans iff(last)
     bins bin_high = {[101:1000]};
 }
 
-aligned_cp_X_len_cp: cross aligned_cp,len_cp;
-unaligned_cp_X_len_cp: cross unaligned_cp,len_cp;
-sparse_cp_X_len_cp: cross sparse_cp,len_cp;
+aligned_cp_X_len_cp: cross aligned_cp,len_cp 
+	{
+	    ignore_bins ignore_bin = aligned_cp_X_len_cp with (len_cp==1); 
+	}
+unaligned_cp_X_len_cp: cross unaligned_cp,len_cp
+	{
+	    ignore_bins ignore_bin1 = unaligned_cp_X_len_cp with (len_cp==1); 
+	}
 
-endgroup : ei_AXIS_covergroup
+sparse_cp_X_len_cp: cross sparse_cp,len_cp 
+	{
+	    ignore_bins ignore_bin2 = sparse_cp_X_len_cp with (len_cp==1); 
+	}
+
+endgroup : ei_AXIS_covergroup*/
 
 
 
@@ -168,7 +181,8 @@ endgroup : ei_AXIS_covergroup
     end
     //$display(valid_TSTRB_queue);
     tr = new();
-    
+    cov_pkt = new();
+
     //ei_AXIS_covergroup = new();
      forever begin
       
@@ -412,10 +426,17 @@ endgroup : ei_AXIS_covergroup
           
          
       
-  		    tr.TDATA_queue = TDATA_queue;
+ 	  tr.TDATA_queue = TDATA_queue;
       	  TDATA_queue.delete();
           TSTRB_queue.delete();
-          ei_AXIS_covergroup.sample(`VMM.TLAST);
+
+	  cov_pkt.TLAST = `VMM.TLAST;
+	  cov_pkt.num_trans = num_trans;
+	  cov_pkt.sparse_stream = sparse_stream;
+	  cov_pkt.aligned_stream = aligned_stream;
+	  cov_pkt.unaligned_stream = unaligned_stream;
+
+	  mon2cov.put(cov_pkt);
           num_trans = 0;
       	  mon2scb.put(tr);
       //$display("mon putted");

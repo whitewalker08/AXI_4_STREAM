@@ -1,4 +1,3 @@
-
 /*-----------------------------------------------------------------------------
 
 
@@ -105,7 +104,7 @@ function void post_randomize();
     
     //no of transfer randomly
     if(num_of_trans == 0)begin
-      count = $urandom_range(4,10);
+      count = $urandom_range(`lower_limit,`upper_limit);
     end
     
        count--;  
@@ -114,7 +113,7 @@ function void post_randomize();
      if(count == 0)begin
         
         TLAST = 1;
-        count = $urandom_range(4,10);
+        count = $urandom_range(`lower_limit,`upper_limit);
 
         //select randomly aligned or sparse stream flag 
         if($urandom_range(0,1))begin

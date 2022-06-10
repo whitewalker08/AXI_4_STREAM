@@ -64,6 +64,7 @@ class ei_AXIS_master_agent#(bit a_cfg = 1'b1);
   ei_AXIS_master_generator gen;
   //declare handle of monitor class
   ei_AXIS_master_monitor mon;
+  ei_AXIS_coverage cov;
 
   //virtual instance of interface
   virtual AXIS_interface vif;
@@ -73,6 +74,7 @@ class ei_AXIS_master_agent#(bit a_cfg = 1'b1);
   mailbox#(ei_AXIS_master_transaction) gen2drv;
   // //mailbox of master monitor to referance 
   mailbox#(ei_AXIS_master_transaction) mon2scb;
+  mailbox mon2cov;
   //method declare
   function new(mailbox#(ei_AXIS_master_transaction) mon2scb);
     this.mon2scb = mon2scb;
@@ -93,12 +95,14 @@ class ei_AXIS_master_agent#(bit a_cfg = 1'b1);
     if(a_cfg) begin
       //allocate memory to mailbox of master generator to driver
       gen2drv = new();
+      mon2cov = new();
       //passing the mailbox and allocate to memory to generator 
       gen = new(gen2drv);
       //passing the mailbox and allocate to memory to driver 
       drv = new(gen2drv);
       //passing the mailbox and allocate to memory to monitor 
-      mon = new(mon2scb);
+      mon = new(mon2scb,mon2cov);
+      cov = new(mon2cov);
       //assigning the event
       gen.drv_done = this.done;
       drv.drv_done = this.done;
@@ -109,7 +113,8 @@ class ei_AXIS_master_agent#(bit a_cfg = 1'b1);
     end
     else begin
       //passing the mailbox and allocate to memory to monitor 
-      mon = new(mon2scb);
+      mon = new(mon2scb,mon2cov);
+      cov = new(mon2cov);
       //connect virtual interface to monitor
       mon.vif = this.vif;
     end
@@ -136,6 +141,7 @@ class ei_AXIS_master_agent#(bit a_cfg = 1'b1);
         gen.run_t();
         drv.run_t();
         mon.run_t();
+	cov.sample_values();
       join
     end
     else begin

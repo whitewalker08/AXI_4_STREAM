@@ -63,7 +63,9 @@ Revision: 1.0
 
 `define DATA_WIDTH 64
 `define number_bytes 8
-
+`define lower_limit;
+`define upper_limit;
+`define no_of_trans;
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -77,7 +79,12 @@ class ei_AXIS_config;
     //static string for verbosity
     static string verbosity = "LOW";
 
-endclass :ei_AXIS_config
+    static int unsigned lower_limit = `"`lower_limit`" ;
+    static int unsigned upper_limit = `"`upper_limit`";
+    static int unsigned no_of_trans = `"`no_of_trans`";
+
+
+endclass
 
 
 ////////////////////////////////////////////////////////////////////////////////

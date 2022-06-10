@@ -99,7 +99,7 @@ class ei_AXIS_SPARSE_STREAM_TEST extends ei_AXIS_master_transaction;
     
     if(num_of_trans == 0)begin
       //count for stream lenght
-      count = $urandom_range(4,10);
+      count = $urandom_range(`lower_limit,`upper_limit);
     end
     
        count--;
@@ -107,7 +107,7 @@ class ei_AXIS_SPARSE_STREAM_TEST extends ei_AXIS_master_transaction;
      if(count == 0)begin
         TLAST = 1;
         //count for stream lenght
-        count = $urandom_range(4,10);
+        count = $urandom_range(`lower_limit,`upper_limit);
         
         end
       

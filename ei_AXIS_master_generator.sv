@@ -90,7 +90,7 @@ class ei_AXIS_master_generator;
   function new( mailbox#(ei_AXIS_master_transaction) gen2drv);
     blueprint = new();
     this.gen2drv = gen2drv;
-    num_of_tran = 1;
+    num_of_tran = (`no_of_trans);
   endfunction
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -110,6 +110,7 @@ class ei_AXIS_master_generator;
     ei_AXIS_master_transaction temp;
     do begin
       blueprint.randomize();
+      //$display(blueprint.count);
       if(blueprint.TLAST==1)begin
         count++;
       end

@@ -161,6 +161,13 @@ program AXIS_test(AXIS_interface vif,AXIS_slave_interface vif_s);
             //assign testcase class to the generator by blueprint method
             env.m_agt.gen.blueprint = video_frame;   
       end
+      if(ei_AXIS_config::testname=="reset_test") begin
+            //Allocation of memory to the seq_write hendle
+             sparse_aligned_unaligned = new();     
+            //assign testcase class to the generator by blueprint method
+            env.m_agt.gen.blueprint = sparse_aligned_unaligned;   
+      end
+      
       //run environment class
       env.run_t(); 
       //end

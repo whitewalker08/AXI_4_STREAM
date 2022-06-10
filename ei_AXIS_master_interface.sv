@@ -61,6 +61,8 @@ Revision: 1.0
 -----------------------------------------------------------------------------*/
 
 //interface with two ports ACLK and ARESETn
+
+
 interface AXIS_interface(input bit ACLK,ARESETn);
   
   //all the required signals according to the protocol for master
@@ -112,7 +114,7 @@ interface AXIS_interface(input bit ACLK,ARESETn);
   modport MTR_DRV(clocking master_driver_cb,input ACLK,input ARESETn);      	
   modport MTR_MON(clocking master_monitor_cb,input ACLK,input ARESETn);
 
-
+/*
 //TVALID is LOW for the first cycle after ARESETn goes HIGH 
 property TVALID_assert;
  @(posedge ACLK) (!ARESETn) |-> ##0 (!TVALID);
@@ -179,5 +181,5 @@ TLAST_Assert : assert property (reset_asserted(ARESETn, TLAST));
 TKEEP_Assert : assert property (reset_asserted(ARESETn, TKEEP));
 TDATA_Assert : assert property (reset_asserted(ARESETn, TDATA));
 
-
+*/
 endinterface : AXIS_interface

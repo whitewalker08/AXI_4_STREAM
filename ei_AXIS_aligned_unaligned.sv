@@ -68,14 +68,14 @@ class ei_AXI_STREAM_ALIGNED_UNALIGNED_MIXED_STREAM extends ei_AXIS_master_transa
 
 
 ////////////////////////////////////////////////////////////////////////////////
-  // Method name(callback method) :   post_randomize;
+  // Method name(callback method) :    post_randomize;
 
   // Parameters passed            : - none
 
   // Returned parameters          : - none
 
-  // Description                  :  to randomize TSTRB according to the aligned and unaligned stream 
-  //                                 according to the  protocol
+  // Description : to randomize TSTRB according to the aligned and unaligned stream 
+  //               according to the  protocol
 
   ////////////////////////////////////////////////////////////////////////////////
 function void post_randomize();
@@ -87,10 +87,13 @@ function void post_randomize();
     TKEEP = (2**(`number_bytes)-1);
     
     if(num_of_trans == 0)begin
-      count = $urandom_range(4,10);
+      count = $urandom_range(`lower_limit,`upper_limit);
     	max_count = count;
     end
       
+    
+
+    
     if(count > 0)begin
         TSTRB = 8'hff;
       if(flag_unaligned)begin
@@ -105,7 +108,7 @@ function void post_randomize();
 
         if(count == 0)begin
             TLAST = 1;
-            count = $urandom_range(4,10);
+            count = $urandom_range(`lower_limit,`upper_limit);
             max_count = count;
             if(flag_unaligned)begin
             TSTRB = 0;
@@ -126,6 +129,8 @@ function void post_randomize();
         else begin
             TLAST = 0;
         end
+     
+
     end
  
       
@@ -135,5 +140,5 @@ function void post_randomize();
       end
     
     num_of_trans++;
-endfunction :post_randomize
+endfunction
 endclass : ei_AXI_STREAM_ALIGNED_UNALIGNED_MIXED_STREAM

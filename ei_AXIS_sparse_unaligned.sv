@@ -107,7 +107,7 @@ class ei_AXI_STREAM_SPARSE_UNALIGNED_MIXED_STREAM extends ei_AXIS_master_transac
     
     if(num_of_trans == 0)begin
       //lenght of stream
-      count = $urandom_range(4,10);
+      count = $urandom_range(`lower_limit,`upper_limit);
     	max_count = count;
     end
       
@@ -129,7 +129,7 @@ class ei_AXI_STREAM_SPARSE_UNALIGNED_MIXED_STREAM extends ei_AXIS_master_transac
         if(count == 0)begin
             TLAST = 1;
             //lenght of stream
-            count = $urandom_range(4,10);
+            count = $urandom_range(`lower_limit,`upper_limit);
             max_count = count;
             if(flag_unaligned)begin
             TSTRB = 0;

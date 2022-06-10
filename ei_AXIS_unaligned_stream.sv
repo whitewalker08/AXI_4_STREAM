@@ -90,7 +90,7 @@ class ei_AXIS_UNALIGNED_STREAM_TEST extends ei_AXIS_master_transaction;
     
     if(num_of_trans == 0)begin
       //lenght of stream
-      count = $urandom_range(4,10);
+      count = $urandom_range(`lower_limit,`upper_limit);
     	max_count = count;
     end
       
@@ -111,7 +111,7 @@ class ei_AXIS_UNALIGNED_STREAM_TEST extends ei_AXIS_master_transaction;
      if(count == 0)begin
         TLAST = 1;
         //lenght of stream
-        count = $urandom_range(4,10);
+        count = $urandom_range(`lower_limit,`upper_limit);
         max_count = count;
         TSTRB = 0;
        for(int i=0;i<$urandom_range(1,6);i++)begin
