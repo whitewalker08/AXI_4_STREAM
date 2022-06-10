@@ -1,11 +1,11 @@
 # System Verilog Project
 # AXI_4_STREAM 
 
-# ========================
-# |        team          |
-# ========================
+========================
+|        team          |
+========================
 
-# Dhruv Bhavsar
-# Mihir Darji
-# Rajat Khatra
-# palak Panara
+Dhruv Bhavsar
+Mihir Darji
+Rajat Khatra
+palak Panara
