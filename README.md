@@ -62,6 +62,8 @@ SPECIFICATIONS : https://zipcpu.com/doc/axi-stream.pdf
 >VIP will be encrypted for user so there should be one display methods which will guide user that what kind of options are there for user for each testcase 
 
 **FILE STRUCTURE**
+
+```bash
 ./AXI_stream/
 ├── Development
 │   ├── bin
@@ -110,5 +112,5 @@ SPECIFICATIONS : https://zipcpu.com/doc/axi-stream.pdf
 │       └── Test\ Plan
 │           └── Functional_Test_Plan_Template\ .xlsx
 └── README.md
-
+```
 
